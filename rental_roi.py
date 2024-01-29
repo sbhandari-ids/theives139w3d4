@@ -1,0 +1,135 @@
+
+
+class rental_roi():
+
+    def __init__(self):
+        print("inside init dunder")
+        self.rental_income = 0
+        self.total_income = 0
+        self.total_expenses = 0
+        
+    def income(self):
+
+        #create an income dictionary
+        #add heading and thier values as key,value pair
+        #add provision to add new heading to the income function
+        #sum-up all the dict-values to find the total income for the month. 
+
+        #print("Total income is : ")
+        income = True
+        total_income = 0
+        income_dict = {}
+
+        income_headings =['rental_income', 'laundry_income', 'other_income_1', 'other_income_2']
+       # input_q = input("do you have a new income to add? type 'y' for yes and 'n' for no. ")
+       # while(input_q != 'n'):
+        for income in income_headings: 
+            income_amt = input(income.upper()+" : ")
+            # if income_amt.isdigit == False: 
+            #    income_dict[income] = 0
+
+            if income_amt.isdigit() == False:
+                income_dict[income] = 0
+          
+            else:
+                income_dict[income] = int(income_amt)
+           
+        #print(income_dict)
+
+        #for income, values in income_dict.items():
+        total_income = sum(income_dict.values())
+
+        #print(total_income)
+        return total_income
+
+
+    def expenses(self):
+       # print(rental_income, total_income)
+        #create an expense dictionary
+        #add heading and thier values as key,value pair
+        #add provision to add new heading to the expenses function
+        #sum-up all the dict-values to find the total expenses for the month. 
+        expense_dict={}
+        print("Total expenses are : ")
+        total_expenses = 0
+        expense_headings =['tax','insurance', 'utilities', 'HOA', 'vancancy', 'capEx', 'maintenance_and_repairs', 'sundry_expense', 'property_management', 'mortgage']
+       # input_q = input("do you have a new income to add? type 'y' for yes and 'n' for no. ")
+       # while(input_q != 'n'):
+        for expense in expense_headings: 
+            # if expense == 'property_management':
+            #     expense_amt = str(rental_income * 0.10)
+            # elif expense == 'tax':
+            #     expense_amt = str( total_income * 0.15)
+            
+            expense_amt = input(expense.upper()+" : ")
+            # if income_amt.isdigit == False: 
+            #    income_dict[income] = 0
+
+            if expense_amt.isnumeric() == False:
+                expense_dict[expense] = 0
+          
+            else:
+                expense_dict[expense] = int(expense_amt)
+           
+        print(expense_dict)
+        total_expenses = sum(expense_dict.values())
+        print(total_expenses)
+        return total_expenses
+
+    def cashflow(self, total_income, total_expenses):
+        print("Net Cashflow during the period : ")
+        # total_income = self.total_income
+        # total_expenses = self.total_expenses
+        print(total_income, total_expenses)
+        total_net_cashflow = total_income - total_expenses
+        print(total_net_cashflow)
+        return total_net_cashflow
+
+    
+
+    def investment(self):
+        investment_dict ={}
+        print("Total Investments are : ")
+        investment_headings =['down_payments', 'closing_costs', 'rehab_budget', 'misc_other']
+        for investment in investment_headings: 
+            investment_amt = input(investment.upper()+" : ")
+            # if income_amt.isdigit == False: 
+            #    income_dict[income] = 0
+
+            if investment_amt.isdigit() == False:
+                investment_dict[investment] = 0
+          
+            else:
+                investment_dict[investment] = int(investment_amt)
+           
+        print(investment_dict)
+
+        #for income, values in income_dict.items():
+        total_investment = sum(investment_dict.values())
+
+        print(total_investment)
+        return total_investment
+
+
+    def net_return(self, net_cashflow, total_investment):
+        print("Net Return during the period is : ")
+
+        annual_cashflow = net_cashflow*12
+
+        net_rental_roi = format(annual_cashflow/total_investment * 100, ".2f")  #rounded_number = format(number, ".2f")  
+        print(net_rental_roi)
+        return net_rental_roi
+    
+
+
+property1 = rental_roi()
+total_income = property1.income()
+print("Total income for the month of January is :  $" , total_income)
+total_expenses = property1.expenses()
+print("Total expenses for the month of January is :  $" , total_expenses)
+net_cashflow = property1.cashflow(total_income, total_expenses)
+print("Net Cash Flow during the month of January is :  $", net_cashflow)
+total_investment = property1.investment()
+print("Total Investments made to the property so far : $ ", total_investment)
+net_rental_roi = property1.net_return(net_cashflow, total_investment)
+print(f"Net ROI generated by the property is : { net_rental_roi} %")
